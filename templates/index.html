@@ -9,7 +9,7 @@
         <div class="col-md-8 px-0">
           <h1 class="display-4 font-italic">{{ blog.title }}</h1>
           <p class="lead my-3">{{ blog.short_description | truncatewords:25}}</p>
-          <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+          <p class="lead mb-0"><a href="{% url 'blogs' blog.slug %}" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
 
       </div>
@@ -23,7 +23,7 @@
       <div class="col-md-6">
         <div class="card border-0" >
           <div class="card-body">
-            <h3>{{ post.title}}</h3>
+            <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{ post.title}}</a></h3>
             <small class="mb-1 text-muted">{{post.created_at | timesince }} ago  | {{post.author}}</small>
             <p class="card-text">{{post.short_description | truncatewords:25}}</p>
           </div>
@@ -40,7 +40,7 @@
         {% for post in blogs %}
       <div class="card border-0" >
         <div class="card-body">
-          <h3>{{ post.title}}</h3>
+          <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{ post.title}}</a></h3>
           <small class="mb-1 text-muted">{{post.created_at | timesince }} ago  | {{post.author}}</small>
           <p class="card-text">{{post.short_description | truncatewords:25}}</p>
         </div>
@@ -52,17 +52,16 @@
 
       <aside class="col-md-4 blog-sidebar">
         <div class="p-3 mb-3 bg-light rounded">
-          <h4 class="font-italic">About</h4>
-         <p class="mb-0">
-    This blog application is built using Django and is designed to share ideas, tutorials, and stories in a simple and user-friendly way. It allows users to read posts, explore topics, and engage with meaningful content. Our goal is to create a space where learning and creativity come together.</p>
+          <h4 class="font-italic">{{about.about_heading}}</h4>
+         <p class="mb-0">{{about.about_text}}</p>
         </div>
 
         <div class="p-3">
           <h4 class="font-italic">Follow Us</h4>
           <ol class="list-unstyled">
-            <li><a href="https://github.com/vishwas2628">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/vishwaschoursiya37">LinkedIn</a></li>
-            <li><a href="https://www.reddit.com/user/Odd_Neck5739">Reddit</a></li>
+            {% for link in social_links %}
+              <li><a href="{{link.link}}">{{link.platform}}</a></li>
+            {% endfor %}
           </ol>
         </div>
       </aside><!-- /.blog-sidebar -->
