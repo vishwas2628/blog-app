@@ -20,7 +20,7 @@
                 <div class="col-4">
                     <form action="{% url 'search' %}" method="get">
                         <div class="input-group">
-                            <input name="keyword" class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                            <input name="keyword" class="form-control" type="text" value="{{keyword}}" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
                             <button type="submit" class="btn btn-warning" id="button-search" type="button">Go!</button>
                         </div>
                     </form>
