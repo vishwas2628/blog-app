@@ -31,7 +31,7 @@
                         <a class="btn btn-sm btn-warning" href="{% url 'login'%}">Login</a> &nbsp;
                         <a class="btn btn-sm btn-outline-secondary" href="{% url 'register'%}">Register</a>
                     {% else %}
-                        <span><a href="{% url 'dashboard' %}" class="text-dark">Dashboard</a></span>
+                        <span><a href="{% url 'dashboard' %}" class="text-dark">Dashboard ({{user}})</a></span>
                         &emsp;
                         <span><a href="{% url 'logout'%}" class="text-danger">Logout</a></span>
                     {% endif %}
