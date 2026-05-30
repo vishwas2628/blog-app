@@ -14,6 +14,9 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title','category','featured_image', 'short_description','blog_body','status','is_featured')
+        widgets = {
+            'blog_body': forms.Textarea(attrs={'id': 'id_blog_body'}),
+        }
 
 class AddUserForm(UserCreationForm):
     class Meta:

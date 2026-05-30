@@ -4,6 +4,12 @@ from blogs.models import Blog,Category
 from django.contrib.auth.decorators import login_required
 from .forms import CategoryForm, BlogPostForm, AddUserForm,EditUserForm
 from django.template.defaultfilters import slugify
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+from .gemini_service import correct_phrases
+
+# Create your views here.
 
 
 @login_required(login_url='login')
@@ -158,3 +164,16 @@ def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()
     return redirect('users')
+
+@csrf_exempt
+async def send_body(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        blog_body = data.get("blog_body", "")
+
+        status, corp_body = await correct_phrases(blog_body)
+
+        if status == "true":
+            return JsonResponse({"message": "Received", "text": corp_body})
+        else:
+            return JsonResponse({"message": "not Received", "text": corp_body})
