@@ -135,3 +135,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+JET_DEFAULT_THEME = 'light-gray'
+# Available themes:
+# default, green, light-green, light-violet,
+# light-blue, light-gray
