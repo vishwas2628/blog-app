@@ -8,9 +8,10 @@ async def correct_phrases(content:str):
     client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
 
     prompt = (
-        "Correct the following text to standard English. Output STRICTLY the "
-        "corrected sentence phrases and nothing else. Do not provide options, explanations, "
-        f"or conversational filler. Here is the text:\n\n{content}"
+        "Correct the grammatical errors and phrasing in the following text to standard English. "
+        "The text contains HTML tags and formatting. "
+        "Output STRICTLY the corrected text, PRESERVING ALL HTML tags and structural formatting exactly as they were. "
+        "Do not provide options, explanations, or conversational filler. Here is the text:\n\n{content}"
     )
 
     try:
@@ -18,7 +19,7 @@ async def correct_phrases(content:str):
             model=os.environ.get("GEMINI_MODEL"),
             contents=prompt
         )
-        print(response.text)
+        print(response)
         return "true" ,response.text
     except errors.ClientError as e:
         print(f"Gemini API Quota Error: {e}")

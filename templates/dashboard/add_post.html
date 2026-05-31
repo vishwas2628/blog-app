@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %} Add New Post {% endblock %}
+
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
 {% block content %}
 {% load crispy_forms_tags %}
 <div class="row">
@@ -23,7 +28,14 @@
 
 <script>
   document.getElementById("sendBodyBtn").addEventListener("click", async function () {
-    const bodyText = document.getElementById("id_blog_body").value;
+    // Extract text directly from TinyMCE editor if it's active
+    let bodyText = "";
+    if (typeof tinymce !== 'undefined' && tinymce.get('id_blog_body')) {
+        bodyText = tinymce.get('id_blog_body').getContent();
+    } else {
+        bodyText = document.getElementById("id_blog_body").value;
+    }
+    console.log(bodyText);
 
     const response = await fetch("http://localhost:8000/dashboard/api/send-body/", {
       method: "POST",
@@ -38,7 +50,12 @@
 
     const data = await response.json();
 
-    document.getElementById("id_blog_body").value = data.text;
+    // Set text back into the TinyMCE editor
+    if (typeof tinymce !== 'undefined' && tinymce.get('id_blog_body')) {
+        tinymce.get('id_blog_body').setContent(data.text);
+    } else {
+        document.getElementById("id_blog_body").value = data.text;
+    }
     console.log(data);
   });
 </script>

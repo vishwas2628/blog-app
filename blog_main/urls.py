@@ -24,6 +24,7 @@ from blogs import views as BlogViews
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')), # Django JET URLS
+    path('tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('category/', include('blogs.urls') ),

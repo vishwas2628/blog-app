@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'jet',
     'blogs.apps.BlogsConfig',
     'assignments.apps.AssignmentsConfig',

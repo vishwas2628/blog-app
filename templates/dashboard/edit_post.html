@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Edit Post {{category.category_name}} {% endblock %}
 
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
 {% block content %}
 {% load crispy_forms_tags %}
 <div class="row">

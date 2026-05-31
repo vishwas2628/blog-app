@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
+from tinymce.widgets import TinyMCE
 from blogs.models import Category, Blog
 
 
@@ -15,7 +16,7 @@ class BlogPostForm(forms.ModelForm):
         model = Blog
         fields = ('title','category','featured_image', 'short_description','blog_body','status','is_featured')
         widgets = {
-            'blog_body': forms.Textarea(attrs={'id': 'id_blog_body'}),
+            'blog_body': TinyMCE(attrs={'id': 'id_blog_body'}),
         }
 
 class AddUserForm(UserCreationForm):
