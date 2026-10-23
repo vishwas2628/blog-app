@@ -15,7 +15,7 @@ async def correct_phrases(content:str):
 
     try:
         response = await client.aio.models.generate_content(
-            model="gemini-3.5-flash",
+            model=os.environ.get("GEMINI_MODEL"),
             contents=prompt
         )
         print(response.text)
